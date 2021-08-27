@@ -6,7 +6,7 @@ if [ -d "$SourceDir" ];then
     cd $SourceDir
     git pull origin master
 else
-    git clone https://gitee.com/dingyusong/apple-build-system.git  $SourceDir
+    git clone https://github.com/dingyusong/apple-build-system.git  $SourceDir
     cd $SourceDir
 fi
 
