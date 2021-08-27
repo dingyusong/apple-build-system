@@ -1,0 +1,13 @@
+{
+  "code": "0000",
+  "data": {
+    "need": 0,
+    "force": 0,
+    "title": "提示",
+    "buildId": "$BUILDID",
+    "msg": "$UPDATEMESSAGE",
+    "url": "$UPDATEURL"
+  },
+  "msg": "操作成功",
+  "serverTime": 1511503801489
+}

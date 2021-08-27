@@ -4,11 +4,15 @@
 import os
 
 class UploadInfoToQiNiu:
-    def __init__(self, *, ak, sk, space, path_update_info, update_url, refershName,next=''):
+    def __init__(self, *, ak, sk, space, path_update_info = '', update_url, refershName,next=''):
         self.ak                     = ak
         self.sk                     = sk
         self.space                  = space
-        self.path_update_info       = path_update_info
+        if path_update_info:
+            self.path_update_info       = path_update_info
+        else:
+            self
+
         self.update_url             = update_url
         self.refershName            = refershName
         

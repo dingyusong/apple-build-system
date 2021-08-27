@@ -43,7 +43,7 @@ fi
 
 ln -s $SourceDir/1-build_ipa/build.sh /usr/local/bin/build_ipa
 ln -s $SourceDir/2-upload_ipa/upload_to_fir.sh  /usr/local/bin/upload_to_fir
-ln -s $SourceDir/4-update_info/upload_info_to_qiniu.sh  /usr/local/bin/upload_info_to_qiniu
+ln -s $SourceDir/5-update_info/upload_info_to_qiniu.sh  /usr/local/bin/upload_info_to_qiniu
 
 function update_shell_env() {
 	cmdd=$1
@@ -59,6 +59,8 @@ function update_shell_env() {
 update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/1-build_ipa'
 update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/2-upload_ipa'
 update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym'
+update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/4-generate_update_info'
+update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/5-update_info'
 
 source ~/.zshrc
 
