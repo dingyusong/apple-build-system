@@ -1,0 +1,142 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+#!/Users/dingyusong/.rvm/rubies/ruby-2.7.0/bin/ruby
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :custom_lane do
+    # add actions here: https://docs.fastlane.tools/actions
+  end
+
+  lane :dev do |options|
+        dev_commom(options) 
+        # path_xcodeproj=options[:path_xcodeproj]
+        # ios_scheme_name=options[:ios_scheme_name]
+        # ios_output_directory=options[:ios_output_directory]
+        # path_workspace=options[:path_workspace]
+        # puts path_xcodeproj
+        # puts ios_scheme_name
+        # puts ios_output_directory
+
+        # # 签名
+        # update_code_signing_settings(
+        #   use_automatic_signing: true,
+        #   path: path_xcodeproj
+        # )
+    
+        # # 打包
+        # build_app(
+        #     workspace:path_workspace,
+        #     # project:path_xcodeproj,
+        #     scheme: ios_scheme_name,
+        #     configuration: 'Release',
+        #     clean: true,
+        #     export_xcargs: "-allowProvisioningUpdates",
+        #     export_options: {
+        #       method: 'development',
+        #       compileBitcode: false
+        #     },
+        #     output_directory:ios_output_directory
+        # )
+  end
+
+
+end
+
+platform :mac do
+  desc "Description of what the lane does"
+  
+  lane :dev do |options|
+
+        dev_commom(options) 
+        
+  end
+
+
+end
+
+
+
+
+lane :dev_commom do |options|
+
+  path_xcodeproj=options[:path_xcodeproj]
+  scheme_name=options[:scheme_name]
+  output_directory=options[:output_directory]
+  path_workspace=options[:path_workspace]
+  build_version=options[:build_version]
+  build_number=options[:build_number]
+  puts path_xcodeproj
+  puts scheme_name
+  puts output_directory
+
+  if build_version && build_version.size > 0
+    puts "update version_number " + build_version
+    # 设置版本号
+    increment_version_number(
+      version_number: build_version,      # specify specific version number (optional, omitting it increments patch version number)
+      xcodeproj: path_xcodeproj  # (optional, you must specify the path to your main Xcode project if it is not in the project root directory)
+    )  
+  end
+
+  if build_number
+    puts "update build_number " + build_number
+    # 更新build号
+    increment_build_number(
+      build_number: build_number,
+      xcodeproj: path_xcodeproj
+    )      
+  end
+    
+  # 签名
+  update_code_signing_settings(
+    use_automatic_signing: true,
+    path: path_xcodeproj
+  )
+
+
+  if path_workspace.include? "xcworkspace" 
+    # 打包
+    build_app(
+      workspace:path_workspace,
+      scheme: scheme_name,
+      configuration: 'Release',
+      clean: true,
+      export_xcargs: "-allowProvisioningUpdates",
+      output_directory:output_directory,
+      export_options: {
+        method: 'development',
+        compileBitcode: false
+      }
+    )
+  else
+    # 打包
+    build_app(
+      project:path_xcodeproj,  
+      scheme: scheme_name,
+      configuration: 'Release',
+      clean: true,
+      export_xcargs: "-allowProvisioningUpdates",
+      output_directory:output_directory,
+      export_options: {
+        method: 'development',
+        compileBitcode: false
+      }
+    )
+  end  
+end
