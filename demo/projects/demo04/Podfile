@@ -1,0 +1,12 @@
+use_frameworks!
+
+target 'demo04' do
+    platform :ios, '9.0'    
+    pod 'Masonry'    
+end
+
+target 'demo042' do
+    platform :ios, '9.0'    
+    pod 'Masonry'    
+end
+

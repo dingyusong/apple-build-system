@@ -8,3 +8,7 @@ __pycache__/
 1-build_ipa/fastlane/README.md
 
 refersh_list.txt
+
+
+Pods/
+xcuserdata/
