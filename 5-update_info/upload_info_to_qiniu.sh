@@ -3,7 +3,7 @@
 #https://github.com/qiniu/qshell
 
 
-WORK_DIR="$HOME/.apple-build-system/4-update_info"
+WORK_DIR="$HOME/.apple-build-system/5-update_info"
 cd $WORK_DIR
 
 usage(){
