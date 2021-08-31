@@ -44,6 +44,8 @@ fi
 ln -sf $SourceDir/1-build_ipa/build.sh /usr/local/bin/build_ipa
 ln -sf $SourceDir/2-upload_ipa/upload_to_fir.sh /usr/local/bin/upload_to_fir
 ln -sf $SourceDir/5-update_info/upload_info_to_qiniu.sh /usr/local/bin/upload_info_to_qiniu
+ln -sf $SourceDir/setup.sh /usr/local/bin/update_apple_build_system
+
 
 function update_shell_env() {
 	cmdd=$1
