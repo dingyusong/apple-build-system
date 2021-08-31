@@ -3,8 +3,6 @@
 import os
 from build_ipa import IPABuilder
 
-
-
 scriptsDir=os.path.dirname(os.path.abspath(__file__))
 demoDir=os.path.dirname(scriptsDir)
 

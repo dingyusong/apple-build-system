@@ -39,4 +39,3 @@ class UploadIPAToFir:
         print("-----------apple-build-system: run upload ipa to fir done-----------")
         if self.next:
             self.next.exec()
-            print('run next')
