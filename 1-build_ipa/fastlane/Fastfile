@@ -74,16 +74,23 @@ end
 
 
 lane :dev_commom do |options|
-
+  puts '---------------parameters1---------------'
+  puts options
   path_xcodeproj=options[:path_xcodeproj]
   scheme_name=options[:scheme_name]
   output_directory=options[:output_directory]
   path_workspace=options[:path_workspace]
   build_version=options[:build_version]
   build_number=options[:build_number]
+  export_option_method=options[:export_option_method]
+
+  puts '---------------parameters---------------'
   puts path_xcodeproj
   puts scheme_name
   puts output_directory
+  puts export_option_method
+
+
 
   if build_version && build_version.size > 0
     puts "update version_number " + build_version
@@ -120,7 +127,7 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: 'development',
+        method: export_option_method,
         compileBitcode: false
       }
     )
@@ -134,7 +141,7 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: 'development',
+        method: export_option_method,
         compileBitcode: false
       }
     )

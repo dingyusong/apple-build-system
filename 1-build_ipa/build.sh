@@ -10,7 +10,7 @@ cd $SourceDir
 
 platform="ios"
 buildno=`date +%Y%m%d%H%M%S`
-
+export_option_method='development'
 usage(){
     echo "Usage: `basename $0` -x <xcodeproj path> [option value]"
     echo "Options:"
@@ -20,10 +20,11 @@ usage(){
     echo "      -b  buildNo, optional,if not paas we will generate"
     echo "      -s  scheme_name, optional, default dump from xcodeproj path"
     echo "      -v  version, optional,"
+    echo "      -e  export_option_method, optional,"
     exit 1
 }
 
-while getopts ":x:m:p:w:b:s:hv:" opt; do 
+while getopts ":x:m:p:w:b:s:e:hv:" opt; do 
   case $opt in
     x)  path_xcodeproj=$OPTARG;;
     p)  platform=$OPTARG ;;
@@ -31,6 +32,7 @@ while getopts ":x:m:p:w:b:s:hv:" opt; do
     b)  buildno=$OPTARG;;
     s)  scheme_name=$OPTARG;;
     v)  build_version=$OPTARG;;
+    e)  export_option_method=$OPTARG;;
     h)  usage;;
     :)
         echo "Option -$OPTARG requires an argument."
@@ -58,6 +60,7 @@ source $SourceDir/output_build.sh $path_xcodeproj $scheme_name $buildno
 fastlane $platform dev \
     path_workspace:$path_workspace \
     path_xcodeproj:$path_xcodeproj \
+    export_option_method:$export_option_method \
     scheme_name:${scheme_name} \
     build_number:${buildno} \
     build_version:${build_version} \

@@ -50,6 +50,25 @@ ipa_uploader    = UploadIPAToFir(
 
 是对测试分发平台 [fir-cli](https://github.com/FIRHQ/fir-cli)的封装。
 
+
+
+## 上传到appStore
+
+```python
+from upload_ipa_to_appstore import UploadIPAToAppStore
+path_ipa            = builder.build_ipa_path()
+appstore_apiKey     = "xxx"
+appstore_apiIssuer  = "xxx"
+ipa_uploader        = UploadIPAToAppStore(
+    path_ipa    = path_ipa,
+    apiKey      = appstore_apiKey,
+    apiIssuer   = appstore_apiIssuer)
+```
+
+是对命令行工具altool的封装。
+
+altool的使用:`xcrun altool --help`
+
 ## 上传符号表
 
 上传到友盟
