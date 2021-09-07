@@ -11,6 +11,7 @@ cd $SourceDir
 platform="ios"
 buildno=`date +%Y%m%d%H%M%S`
 export_option_method='development'
+bitcode_enable='true'
 usage(){
     echo "Usage: `basename $0` -x <xcodeproj path> [option value]"
     echo "Options:"
@@ -21,10 +22,11 @@ usage(){
     echo "      -s  scheme_name, optional, default dump from xcodeproj path"
     echo "      -v  version, optional,"
     echo "      -e  export_option_method, optional,"
+    echo "      -c  bitcode_enable, optional, default true"
     exit 1
 }
 
-while getopts ":x:m:p:w:b:s:e:hv:" opt; do 
+while getopts ":x:m:p:w:b:s:e:hv:c:" opt; do 
   case $opt in
     x)  path_xcodeproj=$OPTARG;;
     p)  platform=$OPTARG ;;
@@ -33,6 +35,7 @@ while getopts ":x:m:p:w:b:s:e:hv:" opt; do
     s)  scheme_name=$OPTARG;;
     v)  build_version=$OPTARG;;
     e)  export_option_method=$OPTARG;;
+    c)  bitcode_enable=$OPTARG;;
     h)  usage;;
     :)
         echo "Option -$OPTARG requires an argument."
@@ -61,6 +64,7 @@ fastlane $platform dev \
     path_workspace:$path_workspace \
     path_xcodeproj:$path_xcodeproj \
     export_option_method:$export_option_method \
+    bitcode_enable:$bitcode_enable \
     scheme_name:${scheme_name} \
     build_number:${buildno} \
     build_version:${build_version} \

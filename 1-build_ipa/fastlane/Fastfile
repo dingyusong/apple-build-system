@@ -83,15 +83,8 @@ lane :dev_commom do |options|
   build_version=options[:build_version]
   build_number=options[:build_number]
   export_option_method=options[:export_option_method]
-
-  puts '---------------parameters---------------'
-  puts path_xcodeproj
-  puts scheme_name
-  puts output_directory
-  puts export_option_method
-
-
-
+  bitcode_enable=options[:bitcode_enable]
+  
   if build_version && build_version.size > 0
     puts "update version_number " + build_version
     # 设置版本号
@@ -127,7 +120,8 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: export_option_method
+        method: export_option_method,
+        compileBitcode: bitcode_enable
       }
     )
   else
@@ -140,7 +134,8 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: export_option_method
+        method: export_option_method,
+        compileBitcode: bitcode_enable
       }
     )
   end  

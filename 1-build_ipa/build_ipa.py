@@ -3,14 +3,15 @@ import os
 from datetime import datetime
 
 class IPABuilder:
-    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', next=''):
+    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', bitcode_enable='true',next=''):
         if build_no == 0:
             build_no = datetime.now().strftime('%Y%m%d%H%M%S')
         self.platform = platform    
         self.path_xp = path_xp
         self.path_ws = path_ws
         self.build_no = build_no
-        self.version = version        
+        self.version = version
+        self.bitcode_enable = bitcode_enable        
         self.export_option_method = export_option_method
         if scheme:
             self.scheme = scheme
@@ -30,6 +31,9 @@ class IPABuilder:
 
         cmd += ' -e '
         cmd += self.export_option_method
+        
+        cmd += ' -c '
+        cmd += self.bitcode_enable
 
         if self.path_ws:
             cmd += ' -w '

@@ -27,6 +27,8 @@ builder = IPABuilder(path_xp = path_xp)
 
 是对打包工具 [fastlane](https://fastlane.tools/)的封装，默认自动签名。
 
+参数：bitcode_enable 两个可选值是'true','false'。默认是'true'。建议上传到AppStore用'true',开启bitcode可以获得一些好处，打测试包的时候就不要开启了，因为编译过程会变长且二进制会变得很大。
+
 ## 上传到fir
 
 ```python
