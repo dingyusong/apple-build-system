@@ -1,7 +1,5 @@
 iOS/macOS 打包，上传ipa，上传符号表，更新提示，工具包，灵活扩展，一体化Python解决方案。
 
-
-
 # 安装
 
 github
@@ -12,19 +10,13 @@ or
 sh -c "$(wget -O- https://raw.githubusercontent.com/dingyusong/apple-build-system/master/setup.sh)" 
 ```
 
-
-
 ```
 source ~/.zshrc
 ```
 
-
-
 # 使用
 
 **Life is  short, use python！**
-
-
 
 ## 打个包
 
@@ -50,9 +42,7 @@ ipa_uploader    = UploadIPAToFir(
 
 是对测试分发平台 [fir-cli](https://github.com/FIRHQ/fir-cli)的封装。
 
-
-
-## 上传到appStore
+## 上传到AppStore
 
 ```python
 from upload_ipa_to_appstore import UploadIPAToAppStore
@@ -134,8 +124,6 @@ qiniu_uploader = UploadInfoToQiNiu(
 
 对[七牛云qshell的上传文件](https://github.com/qiniu/qshell)并刷新cdn的功能封装。
 
-
-
 # 组合
 
 每个模块可视为一个链表的节点，可以将多个节点用next指针连接起来组成一个环环相扣的链表。
@@ -166,19 +154,10 @@ update_info_builder.next    = qiniu_uploader
 builder.exec()
 ```
 
-
-
-
-
 # 扩展
 
 你可以任意新增一个类，在链表的任意环节插入或者替换一个节点，完成功能的扩展或者自定义。
 
-
-
-
-
 # 更新
 
 `update_apple_build_system`
-

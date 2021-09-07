@@ -127,8 +127,7 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: export_option_method,
-        compileBitcode: false
+        method: export_option_method
       }
     )
   else
@@ -141,8 +140,7 @@ lane :dev_commom do |options|
       export_xcargs: "-allowProvisioningUpdates",
       output_directory:output_directory,
       export_options: {
-        method: export_option_method,
-        compileBitcode: false
+        method: export_option_method
       }
     )
   end  
