@@ -23,11 +23,13 @@ usage(){
     echo "      -v  version, optional,"
     echo "      -e  export_option_method, optional,"
     echo "      -c  bitcode_enable, optional, default true"
-    echo "      -o  path_build_dir, optional, default true"
+    echo "      -o  path_build_dir, optional"
+    echo "      -i  sign, manual sign optional"
+    echo "      -u  bundleId manual sign optional"
     exit 1
 }
 
-while getopts ":x:m:p:w:b:s:e:hv:c:o::" opt; do 
+while getopts ":x:m:p:w:b:s:e:hv:c:o::i::u::" opt; do 
   case $opt in
     x)  path_xcodeproj=$OPTARG;;
     p)  platform=$OPTARG ;;
@@ -38,6 +40,8 @@ while getopts ":x:m:p:w:b:s:e:hv:c:o::" opt; do
     e)  export_option_method=$OPTARG;;
     c)  bitcode_enable=$OPTARG;;
     o)  path_build_dir=$OPTARG;;
+    i)  sign=$OPTARG;;
+    u)  bundleId=$OPTARG;;
     h)  usage;;
     :)
         echo "Option -$OPTARG requires an argument."
@@ -80,6 +84,8 @@ fastlane $platform dev \
     build_number:${buildno} \
     build_version:${build_version} \
     output_directory:$path_build_dir \
+    bundleId:$bundleId \
+    sign:$sign \
     | tee -a ${path_build_log_file}
 
 

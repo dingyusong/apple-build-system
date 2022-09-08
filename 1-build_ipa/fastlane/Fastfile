@@ -84,6 +84,8 @@ lane :dev_commom do |options|
   build_number=options[:build_number]
   export_option_method=options[:export_option_method]
   bitcode_enable=options[:bitcode_enable]
+  bundleId=options[:bundleId]
+  sign=options[:sign]
   
   if build_version && build_version.size > 0
     puts "update version_number " + build_version
@@ -103,40 +105,84 @@ lane :dev_commom do |options|
     )      
   end
     
-  # 签名
-  update_code_signing_settings(
-    use_automatic_signing: true,
-    path: path_xcodeproj
-  )
-
+  # http://docs.fastlane.tools/codesigning/xcode-project/
 
   if path_workspace.include? "xcworkspace" 
-    # 打包
-    build_app(
-      workspace:path_workspace,
-      scheme: scheme_name,
-      configuration: 'Release',
-      clean: true,
-      export_xcargs: "-allowProvisioningUpdates",
-      output_directory:output_directory,
-      export_options: {
-        method: export_option_method,
-        compileBitcode: bitcode_enable
-      }
-    )
+    if sign.nil? || sign.empty? || sign.size == 0
+      puts "work : autosign"
+      # 打包
+      build_app(
+        workspace:path_workspace,
+        scheme: scheme_name,
+        configuration: 'Release',
+        clean: true,
+        export_xcargs: "-allowProvisioningUpdates",
+        output_directory:output_directory,
+        export_options: {
+          method: export_option_method,
+          compileBitcode: bitcode_enable,
+        }
+      )
+    else
+      puts "work : manual"
+      # 打包
+      build_app(
+        workspace:path_workspace,
+        scheme: scheme_name,
+        configuration: 'Release',
+        clean: true,
+        output_directory:output_directory,
+        export_options: {
+          method: export_option_method,
+          compileBitcode: bitcode_enable,
+          provisioningProfiles: { 
+            bundleId => sign
+          }
+        }
+      )
+    end
+
   else
-    # 打包
-    build_app(
-      project:path_xcodeproj,  
-      scheme: scheme_name,
-      configuration: 'Release',
-      clean: true,
-      export_xcargs: "-allowProvisioningUpdates",
-      output_directory:output_directory,
-      export_options: {
-        method: export_option_method,
-        compileBitcode: bitcode_enable
-      }
-    )
-  end  
+    puts "signaaaa:" + sign
+    if sign.nil? || sign.empty? || sign.size == 0
+      puts "proj : autosign"
+      # 打包
+      build_app(
+        project:path_xcodeproj,  
+        scheme: scheme_name,
+        configuration: 'Release',
+        clean: true,
+        export_xcargs: "-allowProvisioningUpdates",
+        output_directory:output_directory,
+        export_options: {
+          method: export_option_method,
+          compileBitcode: bitcode_enable
+        }
+      )
+    else
+      puts "proj : manual"
+      # 打包
+      build_app(
+        project:path_xcodeproj,  
+        scheme: scheme_name,
+        configuration: 'Release',
+        clean: true,
+        output_directory:output_directory,
+        export_options: {
+          method: export_option_method,
+          compileBitcode: bitcode_enable,
+          provisioningProfiles: { 
+            bundleId => sign
+          }
+        }
+      )
+    end
+
+
+
+
+  end
+  
+  
+
 end

@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 class IPABuilder:
-    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', bitcode_enable='true',next='',build_dir=''):
+    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', bitcode_enable='true',next='',build_dir='',sign='',bundleId=''):
         if build_no == 0:
             build_no = datetime.now().strftime('%Y%m%d%H%M%S')
         self.platform = platform    
@@ -19,6 +19,8 @@ class IPABuilder:
             self.scheme = os.path.basename(path_xp).split('.')[0]
         self.next = next
         self.build_dir = build_dir
+        self.sign = sign
+        self.bundleId = bundleId
         # if build_dir:
         #     print("self.build_dir has")    
         #     self.build_dir = build_dir
@@ -47,7 +49,13 @@ class IPABuilder:
             cmd += ' -o '
             cmd += self.build_dir
 
-
+        if self.sign:
+            cmd += ' -i '
+            cmd += self.sign
+        if self.bundleId:
+            cmd += ' -u '
+            cmd += self.bundleId           
+                         
         if self.path_ws:
             cmd += ' -w '
             cmd += self.path_ws
