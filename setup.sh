@@ -41,11 +41,11 @@ else
     pip3 install requests
 fi
 
-ln -sf $SourceDir/1-build_ipa/build.sh /usr/local/bin/build_ipa
-ln -sf $SourceDir/2-upload_ipa/upload_to_fir.sh /usr/local/bin/upload_to_fir
-ln -sf $SourceDir/2-upload_ipa/upload_to_appstore.sh /usr/local/bin/upload_to_appstore
-ln -sf $SourceDir/5-update_info/upload_info_to_qiniu.sh /usr/local/bin/upload_info_to_qiniu
-ln -sf $SourceDir/setup.sh /usr/local/bin/update_apple_build_system
+# ln -sf $SourceDir/1-build_ipa/build.sh /usr/local/bin/build_ipa
+# ln -sf $SourceDir/2-upload_ipa/upload_to_fir.sh /usr/local/bin/upload_to_fir
+# ln -sf $SourceDir/2-upload_ipa/upload_to_appstore.sh /usr/local/bin/upload_to_appstore
+# ln -sf $SourceDir/5-update_info/upload_info_to_qiniu.sh /usr/local/bin/upload_info_to_qiniu
+# ln -sf $SourceDir/setup.sh /usr/local/bin/update_apple_build_system
 
 function update_shell_env() {
 	cmdd=$1
@@ -64,7 +64,13 @@ update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/3-upload_s
 update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/4-generate_update_info'
 update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/5-update_info'
 
-source ~/.zshrc
+update_shell_env 'export PATH=$PATH:~/.apple-build-system/1-build_ipa'
+update_shell_env 'export PATH=$PATH:~/.apple-build-system/2-upload_ipa'
+update_shell_env 'export PATH=$PATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym'
+update_shell_env 'export PATH=$PATH:~/.apple-build-system/4-generate_update_info'
+update_shell_env 'export PATH=$PATH:~/.apple-build-system/5-update_info'
+
+# source ~/.zshrc
 
 
 
