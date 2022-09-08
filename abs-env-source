@@ -1,0 +1,11 @@
+export PATH=$PATH:~/.apple-build-system/1-build_ipa
+export PATH=$PATH:~/.apple-build-system/2-upload_ipa
+export PATH=$PATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym
+export PATH=$PATH:~/.apple-build-system/4-generate_update_info
+export PATH=$PATH:~/.apple-build-system/5-update_info
+
+export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/1-build_ipa
+export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/2-upload_ipa  
+export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym
+export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/4-generate_update_info
+export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/5-update_info
