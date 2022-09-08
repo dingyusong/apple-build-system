@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 class IPABuilder:
-    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', bitcode_enable='true',next=''):
+    def __init__(self, * , path_xp, platform='ios', path_ws='', build_no=0, scheme='', version='',export_option_method='development', bitcode_enable='true',next='',build_dir=''):
         if build_no == 0:
             build_no = datetime.now().strftime('%Y%m%d%H%M%S')
         self.platform = platform    
@@ -18,6 +18,14 @@ class IPABuilder:
         else:            
             self.scheme = os.path.basename(path_xp).split('.')[0]
         self.next = next
+        self.build_dir = build_dir
+        # if build_dir:
+        #     print("self.build_dir has")    
+        #     self.build_dir = build_dir
+        # else:
+        #     print("self.build_dir no")    
+        #     self.build_dir = self.build_dir()
+        # print("self.build_dir",self.build_dir)        
 
     def exec(self):
         print("-----------apple-build-system: run build ipa start-----------")        
@@ -34,6 +42,11 @@ class IPABuilder:
         
         cmd += ' -c '
         cmd += self.bitcode_enable
+
+        if self.build_dir:
+            cmd += ' -o '
+            cmd += self.build_dir
+
 
         if self.path_ws:
             cmd += ' -w '
@@ -55,16 +68,16 @@ class IPABuilder:
 
     def build_ipa_path(self):
         if self.platform == 'ios':
-            return os.path.join(self.build_dir(),self.scheme+'.ipa')
+            return os.path.join(self.build_dir,self.scheme+'.ipa')
         if self.platform == 'mac':
-            return os.path.join(self.build_dir(),self.scheme+'.app')
+            return os.path.join(self.build_dir,self.scheme+'.app')
 
     def build_dir(self):
         dir = os.path.dirname(self.path_xp)        
         return os.path.join(dir,'build',self.scheme,str(self.build_no))
 
     def build_symbol_path(self):
-        return os.path.join(self.build_dir(),self.build_symbol_name())
+        return os.path.join(self.build_dir,self.build_symbol_name())
     
     def build_symbol_name(self):
         return self.scheme+'.app.dSYM.zip'
