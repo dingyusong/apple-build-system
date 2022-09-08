@@ -53,20 +53,6 @@ function update_shell_env() {
 	fi  
 }
 
-# update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/1-build_ipa'
-# update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/2-upload_ipa'
-# update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym'
-# update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/4-generate_update_info'
-# update_shell_env 'export PYTHONPATH=$PYTHONPATH:~/.apple-build-system/5-update_info'
-
-# update_shell_env 'export PATH=$PATH:~/.apple-build-system/1-build_ipa'
-# update_shell_env 'export PATH=$PATH:~/.apple-build-system/2-upload_ipa'
-# update_shell_env 'export PATH=$PATH:~/.apple-build-system/3-upload_symbol/upload_umeng_dsym'
-# update_shell_env 'export PATH=$PATH:~/.apple-build-system/4-generate_update_info'
-# update_shell_env 'export PATH=$PATH:~/.apple-build-system/5-update_info'
-
-# source ~/.zshrc
-
 update_shell_env 'source ~/.apple-build-system/abs-env-source'
 
 
