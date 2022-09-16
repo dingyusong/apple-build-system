@@ -97,12 +97,15 @@ lane :dev_commom do |options|
   end
 
   if build_number
-    puts "update build_number " + build_number
-    # 更新build号
-    increment_build_number(
-      build_number: build_number,
+    puts "update build_number " + build_number + " " + scheme_name
+    
+    # refer to https://github.com/SiarheiFedartsou/fastlane-plugin-versioning/issues/18
+    increment_build_number_in_plist(
+      build_number: build_number, # set build number to 42
+      target: scheme_name,
       xcodeproj: path_xcodeproj
-    )      
+    )
+
   end
     
   # http://docs.fastlane.tools/codesigning/xcode-project/

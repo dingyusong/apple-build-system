@@ -75,7 +75,7 @@ path_build_log_file="${path_build_dir}/build.log"
 mkdir -p $path_build_dir
 touch $path_build_log_file
 
-fastlane $platform dev \
+bundle exec fastlane $platform dev \
     path_workspace:$path_workspace \
     path_xcodeproj:$path_xcodeproj \
     export_option_method:$export_option_method \
