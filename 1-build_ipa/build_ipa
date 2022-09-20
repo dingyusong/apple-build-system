@@ -9,7 +9,7 @@ SourceDir="$HOME/.apple-build-system/1-build_ipa"
 cd $SourceDir
 
 platform="ios"
-buildno=`date +%Y%m%d%H%M%S`
+# buildno=`date +%Y%m%d%H%M%S`
 export_option_method='development'
 bitcode_enable='true'
 usage(){
@@ -67,8 +67,6 @@ fi
 if [ ! -n "$path_build_dir" ];then
     path_xcodeproj_dir=$(dirname $path_xcodeproj)
     path_build_dir="${path_xcodeproj_dir}/build/$scheme_name/${buildno}"
-else    
-    path_build_dir="${path_build_dir}/$scheme_name/${buildno}"
 fi
 
 path_build_log_file="${path_build_dir}/build.log"

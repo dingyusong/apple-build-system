@@ -44,6 +44,21 @@ ipa_uploader    = UploadIPAToFir(
 
 是对测试分发平台 [fir-cli](https://github.com/FIRHQ/fir-cli)的封装。
 
+
+
+## 上传到蒲公英
+
+```python
+from upload_ipa_to_pgyer import UploadIPAToPgyer
+pg_upload = UploadIPAToPgyer(   path_ipa=builder.build_ipa_path(),
+                                pgyer_api_key="xxx")
+builder.next = pg_upload
+```
+
+ 参考 https://github.com/PGYER/pgyer_api_example
+
+
+
 ## 上传到AppStore
 
 ```python

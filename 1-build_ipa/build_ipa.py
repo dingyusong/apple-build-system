@@ -45,9 +45,9 @@ class IPABuilder:
         cmd += ' -c '
         cmd += self.bitcode_enable
 
-        if self.build_dir:
-            cmd += ' -o '
-            cmd += self.build_dir
+        
+        cmd += ' -o '
+        cmd += self.build_dir_path()
 
         if self.sign:
             cmd += ' -i '
@@ -76,19 +76,27 @@ class IPABuilder:
 
     def build_ipa_path(self):
         if self.platform == 'ios':
-            return os.path.join(self.build_dir,self.scheme+'.ipa')
+            return os.path.join(self.build_dir_path(),self.scheme+'.ipa')
         if self.platform == 'mac':
-            return os.path.join(self.build_dir,self.scheme+'.app')
+            return os.path.join(self.build_dir_path(),self.scheme+'.app')
 
-    def build_dir(self):
-        dir = os.path.dirname(self.path_xp)        
-        return os.path.join(dir,'build',self.scheme,str(self.build_no))
+    def build_dir_path(self):
+        if self.build_dir:
+            return os.path.join(self.build_dir,self.scheme,str(self.build_no))    
+        else:
+            dir = os.path.dirname(self.path_xp)        
+            return os.path.join(dir,'build',self.scheme,str(self.build_no))
 
     def build_symbol_path(self):
-        return os.path.join(self.build_dir,self.build_symbol_name())
+        return os.path.join(self.build_dir_path(),self.build_symbol_name())
     
     def build_symbol_name(self):
         return self.scheme+'.app.dSYM.zip'
 
     def build_ipa_version(self):
         return self.version
+
+    def build_scheme(self):
+        return self.version
+
+    
