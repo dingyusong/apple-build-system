@@ -11,11 +11,12 @@ import requests
 
 
 class UploadIPAToPgyer:
-    def __init__(self, *, path_ipa, pgyer_api_key, pgyer_password='', next=''):
+    def __init__(self, *, path_ipa, pgyer_api_key,install_type=1, pgyer_password='', next=''):
         print("path_ipa:",path_ipa,"pgyer_api_key:",pgyer_api_key,"pgyer_password:",pgyer_password)
         self.path_ipa = path_ipa
         self.pgyer_api_key = pgyer_api_key
         self.pgyer_password = pgyer_password
+        self.install_type=install_type
         self.next = next
 
 
@@ -131,6 +132,7 @@ class UploadIPAToPgyer:
         self.upload_to_pgyer(
             path = self.path_ipa, 
             api_key = self.pgyer_api_key, 
+            install_type = self.install_type,
             password= self.pgyer_password, 
             callback=upload_complete_callback
         )
